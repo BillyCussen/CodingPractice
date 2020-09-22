@@ -55,6 +55,11 @@ public class LotteryApp{
         playerNumbers = new int[linesToBePlayed][LENGTH];
 
         for(int i = 0; i < linesToBePlayed; i++){
+
+            do{
+
+                try{
+
                 do{
                     inputCheck = true;
                     keyboard = new Scanner(System.in);
@@ -64,25 +69,43 @@ public class LotteryApp{
                         System.out.print("Please enter your 6 numbers for line "+(i+1)+": ");
                         userNumbersInput = keyboard.nextLine();
                         String[] userNumbersTemp = userNumbersInput.split(" ");
+                        
 
                         if(userNumbersTemp.length != 6){
-                            throw new InputMismatchException();
+                            throw new InputMismatchException("You need to enter 6 Integers between 1 and 40 e.g. \"1 2 39 2 1 27\"");
                         }
-                        
+
                         for(int j = 0; j < userNumbersTemp.length; j++) {
                             playerNumbers[i][j] = Integer.parseInt(userNumbersTemp[j]);
                         }
 
-                    }catch(InputMismatchException | NumberFormatException e){
-                        System.out.println("You need to enter 6 Integers between 1 and 40 e.g. \"1 2 39 2 1 27\"");
+                        
+
+                    }catch(InputMismatchException e){
+                        System.out.println(e.getMessage());
                         inputCheck = false;
-                    } finally{
+                    } catch(NumberFormatException f){
+                        System.out.println("You need to enter Integers!");   
+                        inputCheck = false;
+                    }finally{
                         keyboard = null;
                     }
 
                 }while(!inputCheck);
+
+                if(myLotteryApp.checkForDuplicates(playerNumbers)){
+                    throw new InputMismatchException("You have entered a Duplicate Number, none of your lines may include duplicate selections");
+                }
+
+                }catch(InputMismatchException e){
+                    inputCheck = false;
+                    System.out.println(e.getMessage());
+                }
+
+            }while(!inputCheck);
         }
 
+        
     }
 
 }

@@ -31,4 +31,28 @@ public class Lottery{
         return this.randomNumbers;
     }
 
+    public boolean checkForDuplicates(int[][] selection){        
+        
+        //In Progress
+        if(selection.length == 1){
+            for(int i = 0; i < selection[0].length;i++){ 
+                for(int j = i+1; j < selection[0].length;i++){
+                    if(selection[0][i] == selection[0][j]){
+                            return true;
+                    }
+                }
+            }            
+        } else{
+            for(int i = 0; i < selection.length;i++){ 
+                for(int j = 0; j < selection[0].length;i++){
+                    for(int k = j+1; k < selection.length; k++){
+                        if(selection[i][j] == selection[i][k]){
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
 }
