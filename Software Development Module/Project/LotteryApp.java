@@ -24,11 +24,7 @@ public class LotteryApp{
         Lottery myLotteryApp = new Lottery();
         
         //Description
-        System.out.println("***LOTTERY GAME***");
-        System.out.println("Description: 6 random secret lottery numbers between 1 and 40 are generated!");
-        System.out.println("Rule 1: You can play up to 3 lines per game!");
-        System.out.println("Rule 2: You can guess 6 Numbers per line!");
-        System.out.println("Rule 3: If you guess 3 or more numbers, you'll win a prize!\n");
+        myLotteryApp.greetings();
 
         //Input
         do{
@@ -54,57 +50,57 @@ public class LotteryApp{
 
         playerNumbers = new int[linesToBePlayed][LENGTH];
 
-        for(int i = 0; i < linesToBePlayed; i++){
+        do{
 
-            do{
+            try{
 
-                try{
+                for(int i = 0; i < linesToBePlayed; i++){
 
-                do{
-                    inputCheck = true;
-                    keyboard = new Scanner(System.in);
-                    String userNumbersInput = new String();
-                    
-                    try{
-                        System.out.print("Please enter your 6 numbers for line "+(i+1)+": ");
-                        userNumbersInput = keyboard.nextLine();
-                        String[] userNumbersTemp = userNumbersInput.split(" ");
+                    do{
+                        inputCheck = true;
+                        keyboard = new Scanner(System.in);
+                        String userNumbersInput = new String();
                         
+                        try{
+                            System.out.print("Please enter your 6 numbers for line "+(i+1)+": ");
+                            userNumbersInput = keyboard.nextLine();
+                            String[] userNumbersTemp = userNumbersInput.split(" ");
 
-                        if(userNumbersTemp.length != 6){
-                            throw new InputMismatchException("You need to enter 6 Integers between 1 and 40 e.g. \"1 2 39 2 1 27\"");
+                            if(userNumbersTemp.length != 6){
+                                throw new InputMismatchException();
+                            }
+
+                            for(int j = 0; j < userNumbersTemp.length; j++) {
+                                if(Integer.parseInt(userNumbersTemp[j])<1||Integer.parseInt(userNumbersTemp[j])>40){
+                                    throw new InputMismatchException();
+                                } else{
+                                    playerNumbers[i][j] = Integer.parseInt(userNumbersTemp[j]);
+                                }
+                            }
+
+                        }catch(InputMismatchException e){
+                            System.out.println("You need to enter 6 Integers between 1 and 40 e.g. \"1 2 39 2 1 27\"");
+                            inputCheck = false;
+                        } catch(NumberFormatException f){
+                            System.out.println("You need to enter Integers!");   
+                            inputCheck = false;
+                        }finally{
+                            keyboard = null;
                         }
 
-                        for(int j = 0; j < userNumbersTemp.length; j++) {
-                            playerNumbers[i][j] = Integer.parseInt(userNumbersTemp[j]);
-                        }
-
-                        
-
-                    }catch(InputMismatchException e){
-                        System.out.println(e.getMessage());
-                        inputCheck = false;
-                    } catch(NumberFormatException f){
-                        System.out.println("You need to enter Integers!");   
-                        inputCheck = false;
-                    }finally{
-                        keyboard = null;
-                    }
-
-                }while(!inputCheck);
+                    }while(!inputCheck);
+                }
 
                 if(myLotteryApp.checkForDuplicates(playerNumbers)){
                     throw new InputMismatchException("You have entered a Duplicate Number, none of your lines may include duplicate selections");
                 }
 
-                }catch(InputMismatchException e){
-                    inputCheck = false;
-                    System.out.println(e.getMessage());
-                }
+            }catch(InputMismatchException e){
+                inputCheck = false;
+                System.out.println(e.getMessage());
+            }
 
-            }while(!inputCheck);
-        }
-
+        }while(!inputCheck);
         
     }
 

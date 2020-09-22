@@ -5,7 +5,8 @@ Billy Cussen
 */
 
 //In Progress
-
+import java.util.Arrays;
+import java.util.Set;
 import java.util.HashSet;
 
 public class Lottery{
@@ -16,6 +17,14 @@ public class Lottery{
     //Constructor
     public Lottery(){
         this.randomNumbers = new int[this.LENGTH];
+    }
+
+    public void greetings(){
+        System.out.println("***LOTTERY GAME***");
+        System.out.println("Description: 6 random secret lottery numbers between 1 and 40 are generated!");
+        System.out.println("Rule 1: You can play up to 3 lines per game!");
+        System.out.println("Rule 2: You can guess 6 Numbers per line!");
+        System.out.println("Rule 3: If you guess 3 or more numbers, you'll win a prize!\n");
     }
 
     public int[] generateRandomNumbers(){
@@ -33,23 +42,22 @@ public class Lottery{
 
     public boolean checkForDuplicates(int[][] selection){        
         
-        //In Progress
         if(selection.length == 1){
             for(int i = 0; i < selection[0].length;i++){ 
-                for(int j = i+1; j < selection[0].length;i++){
-                    if(selection[0][i] == selection[0][j]){
+                for(int j = i+1; j < selection[0].length;j++){
+                    if(selection[0][i] == selection[0][j] && i != j){
                             return true;
                     }
                 }
             }            
         } else{
+            //In Progress - Logic is wrong
             for(int i = 0; i < selection.length;i++){ 
-                for(int j = 0; j < selection[0].length;i++){
-                    for(int k = j+1; k < selection.length; k++){
-                        if(selection[i][j] == selection[i][k]){
-                            return true;
-                        }
-                    }
+                Set allNumbers = new HashSet(Arrays.asList(selection[i]));
+                System.out.println(allNumbers.toString());
+                if (allNumbers.size() < selection[i].length) {
+                    System.out.println(allNumbers.size()+": "+selection[i].length);
+                    return true;
                 }
             }
         }
