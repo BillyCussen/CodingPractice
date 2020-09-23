@@ -46,18 +46,19 @@ public class Lottery{
             for(int i = 0; i < selection[0].length;i++){ 
                 for(int j = i+1; j < selection[0].length;j++){
                     if(selection[0][i] == selection[0][j] && i != j){
-                            return true;
+                        return true;
                     }
                 }
             }            
-        } else{
-            //In Progress - Logic is wrong
+        } else{   
+            HashSet<Integer> userNumbersTemp = new HashSet<Integer>();
             for(int i = 0; i < selection.length;i++){ 
-                Set allNumbers = new HashSet(Arrays.asList(selection[i]));
-                System.out.println(allNumbers.toString());
-                if (allNumbers.size() < selection[i].length) {
-                    System.out.println(allNumbers.size()+": "+selection[i].length);
-                    return true;
+                for (int j=0; j < selection[0].length; j++) {
+                    if(userNumbersTemp.contains(selection[i][j])){
+                        return true;
+                    } else{
+                        userNumbersTemp.add(selection[i][j]);
+                    }
                 }
             }
         }

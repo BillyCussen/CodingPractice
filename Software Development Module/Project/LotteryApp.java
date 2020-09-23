@@ -26,7 +26,7 @@ public class LotteryApp{
         //Description
         myLotteryApp.greetings();
 
-        //Input
+        //Input - How Many Numbers
         do{
             keyboard = new Scanner(System.in);
             inputCheck = true;
@@ -50,6 +50,7 @@ public class LotteryApp{
 
         playerNumbers = new int[linesToBePlayed][LENGTH];
 
+        //Input - The Players Numbers
         do{
 
             try{
