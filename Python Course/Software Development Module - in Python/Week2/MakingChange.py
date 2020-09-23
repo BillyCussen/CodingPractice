@@ -17,10 +17,6 @@ while repeat == "y":
     oneEuro = 0
     fiftyCent = 0
     twentyCent = 0
-    tenCent = 0
-    fiveCent = 0
-    twoCent = 0
-    oneCent = 0
 
     while inputCheck:
         try:
