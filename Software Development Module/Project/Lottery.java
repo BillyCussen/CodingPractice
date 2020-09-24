@@ -6,17 +6,26 @@ Billy Cussen
 
 //In Progress
 import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 import java.util.HashSet;
 
 public class Lottery{
 
-    private int[] randomNumbers;
+    private Integer[] randomNumbers;
     private final int LENGTH = 6;
+    private int linesWon;
+    private int totalWinnings;
+    private String historyInfo;
+    private String gameResult;
 
     //Constructor
     public Lottery(){
-        this.randomNumbers = new int[this.LENGTH];
+        this.randomNumbers = new Integer[this.LENGTH];
+        this.linesWon = 0;
+        this.totalWinnings = 0;
+        this.historyInfo = "***GAME HISTORY***\n";
+        this.gameResult = new String();
     }
 
     public void greetings(){
@@ -27,7 +36,7 @@ public class Lottery{
         System.out.println("Rule 3: If you guess 3 or more numbers, you'll win a prize!\n");
     }
 
-    public int[] generateRandomNumbers(){
+    public Integer[] generateRandomNumbers(){
         HashSet<Integer> randomNumbersTemp = new HashSet<Integer>();
         for(int i = 0; i < this.LENGTH; i++){
             int randomNumber = (int) (Math.random()*40)+1;
@@ -41,7 +50,6 @@ public class Lottery{
     }
 
     public boolean checkForDuplicates(int[][] selection){        
-        
         if(selection.length == 1){
             for(int i = 0; i < selection[0].length;i++){ 
                 for(int j = i+1; j < selection[0].length;j++){
@@ -63,5 +71,53 @@ public class Lottery{
             }
         }
         return false;
+    }
+
+    public String getResult(int[][] selection, int gameNumber){
+        this.historyInfo += "On Game "+gameNumber+", you played "+selection.length+" lines.";
+        this.gameResult = "Game "+gameNumber+" Results\nRandom Numbers are: ";
+        int lineOne = 0, lineTwo = 0, lineThree = 0;
+        Integer[] randTemp = generateRandomNumbers();
+        List randomNumbers = Arrays.asList(randTemp);
+        System.out.println(randomNumbers.get(0));
+        for(int e: randTemp){
+            this.gameResult+=e +" ";
+        }
+        this.gameResult+="\n";
+
+        //Determine How many Matches Per Line - Needs work
+        for(int i = 0; i < selection.length; i++){
+            for(int j = 0; j < selection[0].length; j++){
+                if(randomNumbers.contains(selection[i][j])){
+                    System.out.println("DEBUG: Match was found");
+                    if(i==0){
+                        lineOne++;
+                        if(j == selection[0].length-1){
+                            this.gameResult+="On line "+(i+1)+", you guessed "+lineOne+" numbers correctly";
+                        }
+                    } else if(i==1){
+                        lineTwo++;
+                        if(j == selection[0].length-1){
+                            this.gameResult+="On line "+(i+1)+", you guessed "+lineOne+" numbers correctly";
+                        }
+                    }else{
+                        lineThree++;
+                        if(j == selection[0].length-1){
+                            this.gameResult+="On line "+(i+1)+", you guessed "+lineOne+" numbers correctly";
+                        }
+                    }
+                }
+            }
+        }
+        if(lineOne==0&&lineTwo==0&&lineThree==0){
+            this.gameResult+="Sorry, you win nothing on this round!\n";
+        }
+
+        this.historyInfo += "\nYou guessed "+(lineOne+lineTwo+lineThree)+" numbers correctly.\n";
+        return this.gameResult+"\n";
+    }
+
+    public String getHistory(){
+        return this.historyInfo;
     }
 }
