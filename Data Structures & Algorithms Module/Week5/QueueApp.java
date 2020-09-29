@@ -60,8 +60,12 @@ public class QueueApp{
 
         //Output
         try{
+            System.out.println("Size of the Queue (Using size method): "+myQueue.size());
             System.out.println("The First Element is (Using Peek Method): "+myQueue.peek());
+            System.out.println(myQueue.toString());
             System.out.println("We are going to Test Removing an Item(Using deQueue Method): "+myQueue.deQueue()+"\n");
+            System.out.println("Size of the Queue (Using size method): "+myQueue.size());
+            System.out.println("The First Element is (Using Peek Method): "+myQueue.peek());
             System.out.println(myQueue.toString());
         }catch(QueueEmptyException e){
             System.out.println(e.getMessage());
