@@ -20,6 +20,9 @@ public class RecursionRevision{
 
         System.out.println("***Reverse String***");
         System.out.println("Reverse: "+reverse("hello")+", Recursion: "+reverseRecursion("hello"));
+
+        System.out.println("***COUNT HI IN A STRING***");
+        System.out.println("Count Hi: "+hiCount("hihihphohohohi")+", Recursion: "+hiCountRecursion("hihihphohohohi"));
     }
 
     public static int fib(int n){
@@ -85,6 +88,29 @@ public class RecursionRevision{
             return s;
         }
         return s.charAt(len - 1)+reverseRecursion(s.substring(0,len-1));
+    }
+
+    public static int hiCount(String s){
+        int count = 0;
+        for(int i = 0; i < s.length()-1; i++){
+            if(s.charAt(i)=='h'&&s.charAt(i+1)=='i'){
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public static int hiCountRecursion(String s){
+        int len = s.length();
+        int count = 0;
+        if(len==0){
+            return 0;
+        }
+
+        if(s.charAt(0)=='h'&&s.charAt(1)=='i'){
+            count++;
+        }
+        return count + hiCountRecursion(s.substring(1,len));
     }
 
 }
