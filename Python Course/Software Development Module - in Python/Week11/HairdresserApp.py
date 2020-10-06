@@ -34,7 +34,7 @@ while repeat == "y":
             hairType = str(input("Please enter your Hair Type (\"Long\", \"Mid\" or \"Short\"): "))
             hairType = hairType.lower()
         except:
-            hairType("You need to enter your Hair type!")
+            print("You need to enter your Hair type!")
         else:
             if(hairType != "long" and hairType != "mid" and hairType != "short"):
                 print("You need to enter \"Long\", \"Mid\" or \"Short\"!")
