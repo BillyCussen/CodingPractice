@@ -6,6 +6,7 @@ Billy Cussen
 
 #Objects
 import gc
+import re
 import Assessment 
 from Assessment import myAssessment
 import Test 
@@ -84,7 +85,7 @@ while repeat == "y":
         #Process & Output
         try:
             myTestApp = myTest(weighting, name, typeOfAssessment, questions, duration)
-            print(myAssessmentApp.toString())
+            print(myTestApp.toString())
         except Exception as e:
             print(str(e))
         finally:
@@ -93,20 +94,21 @@ while repeat == "y":
     else:
         while inputCheck == False:
             try:
-                dateTemp = int(input("Enter the Deadline Date of this "+str(typeOfAssessment)+" (In the format DD/MM/YYYY): "))
-                day, month, year = map(int, dateTemp.split('/'))
-                deadline = str(day)+"/"+str(month)+"/"+str(year)
+                dateTemp = str(input("Enter the Deadline Date of this "+str(typeOfAssessment)+" (In the format DD/MM/YYYY): "))
+                checkDate = re.search("[0-9]{2}/[0-9]{2}/[0-9]{4}", dateTemp)
+                if checkDate == False:
+                    raise Exception()
             except:
                 print("You need to enter a valid Deadline Date for this "+str(typeOfAssessment)+"!")
             else:
-                if(len(deadline) < 8):
+                if(len(dateTemp) < 8):
                     print("You need to enter a valid Date for the Deadline!")
                 else:
                     inputCheck = True
 
         #Process & Output
         try:
-            myAssessmentApp = myProject(weighting, name, typeOfAssessment, deadline)
+            myAssessmentApp = myProject(weighting, name, typeOfAssessment, dateTemp)
             print(myAssessmentApp.toString())
         except Exception as e:
             print(str(e))

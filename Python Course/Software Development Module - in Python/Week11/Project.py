@@ -7,7 +7,7 @@ import Assessment
 
 class myProject(Assessment.myAssessment):
 
-    def __init(self, weighting, name, typeOfAssessment, deadline):
+    def __init__(self, weighting, name, typeOfAssessment, deadline):
         super().__init__(weighting, name, typeOfAssessment)
         self.deadline = deadline
 
@@ -18,5 +18,5 @@ class myProject(Assessment.myAssessment):
         return self.deadline
 
     def toString(self):
-        return "Deadline: " + str(self.deadline)
+        return "Weighting: "+str(self.weighting)+"\nName: "+self.name+"\nType of Assessment: "+self.typeOfAssessment+"\nDeadline: " + str(self.deadline)
         

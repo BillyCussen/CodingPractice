@@ -7,7 +7,7 @@ import Assessment
 
 class myTest(Assessment.myAssessment):
 
-    def __init(self, weighting, name, typeOfAssessment, questions, duration):
+    def __init__(self, weighting, name, typeOfAssessment, questions, duration):
         super().__init__(weighting, name, typeOfAssessment)
         self.questions = questions
         self.duration = duration
@@ -25,5 +25,6 @@ class myTest(Assessment.myAssessment):
         return self.duration
 
     def toString(self):
-        return "Questions: " + str(self.questions) + ", Duration: "+ str(self.duration)
+        return "Weighting: "+str(self.weighting)+"\nName: "+self.name+"\nType of Assessment: "+self.typeOfAssessment+"\nQuestions: " + str(self.questions) + "\nDuration: "+ str(self.duration)
+        return 
         
