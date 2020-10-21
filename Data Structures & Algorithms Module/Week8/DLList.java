@@ -31,24 +31,57 @@ public class DLList<T> implements DLInterface<T>{
             add(element);
         } else if(index == 0){
             first = new DLNode<T>(element,null,first);
+            first.successor.previous = first;
         } else{
             DLNode<T> current = first;
             for(int i = 0; i < index - 1; i++){
                 current = current.successor;
             }
-            DLNode<T> new = new DLNode<T>(element);
-            //To be continued...
+            DLNode<T> newNode = new DLNode<T>(element);
+            DLNode<T> rightNode = getNode(index);
+            DLNode<T> leftNode = rightNode.previous;
+            leftNode.successor = newNode;
+            newNode.previous = leftNode;
+            newNode.successor = rightNode;
+            rightNode.previous = newNode;
+        }
+    }
+
+    private DLNode<T> getNode(int index){
+        if(index < 0 || index > size()){
+            throw new NullPointerException();
+        } else if(index == 0){
+            return first;
+        } else{
+            DLNode<T> current = first;
+            for(int i = 0; i < index; i++){
+                current = current.successor;
+            }
+            return current;
         }
     }
     
     @Override
     public void addBefore(T element, T target){
-
+        addByIndex(element,getIndex(target));
     }
     
     @Override
     public void addAfter(T element, T target){
+        addByIndex(element,getIndex(target)+1);
+    }
 
+    private int getIndex(T target){
+        DLNode<T> current = first;
+        int index = 0;
+        while(current != null){
+            if(current.element.equals(target)){
+                return index;
+            }
+            index++;
+            current = current.successor;
+        }
+        return -1;
     }
     
     @Override
@@ -71,12 +104,32 @@ public class DLList<T> implements DLInterface<T>{
 
     @Override
     public T removeByElement(T target){
-        return null;
+        return removeByIndex(getIndex(target));
     }
     
     @Override
     public T removeByIndex(int index){
-        return null;
+        if(index < 0 || index > size() || isEmpty()){
+            throw new NullPointerException();
+        } else if(index == 0){
+            T element = first.element;
+            first = first.successor;
+            first.previous = null;
+            return element;
+        } else{
+            DLNode<T> current = first;
+            for(int i = 0; i < index-1;i++){
+                current = current.successor;
+            }
+            T element = current.successor.element;
+            current.successor = current.successor.successor;
+            if(current.successor == null){
+                last = current;
+            } else{
+                current.successor.previous = current;
+            }
+            return element;
+        }
     }
 
     @Override
@@ -115,7 +168,16 @@ public class DLList<T> implements DLInterface<T>{
         DLList<Integer> myList = new DLList<Integer>();
         myList.add(20);
         myList.add(40);
-
+        myList.addByIndex(200,0);
+        myList.addByIndex(60,myList.size());
+        myList.addByIndex(400,2);
+        myList.addBefore(600,60);
+        myList.addBefore(10,200);
+        myList.addAfter(1,10);
+        myList.removeByElement(10);
+        myList.removeByIndex(0);
+        myList.removeByElement(60);
+        myList.removeByIndex(myList.size()-1);
         System.out.println(myList.toString());
         System.out.println(myList.toStringBackwards());
 
