@@ -33,10 +33,6 @@ public class DLList<T> implements DLInterface<T>{
             first = new DLNode<T>(element,null,first);
             first.successor.previous = first;
         } else{
-            DLNode<T> current = first;
-            for(int i = 0; i < index - 1; i++){
-                current = current.successor;
-            }
             DLNode<T> newNode = new DLNode<T>(element);
             DLNode<T> rightNode = getNode(index);
             DLNode<T> leftNode = rightNode.previous;
