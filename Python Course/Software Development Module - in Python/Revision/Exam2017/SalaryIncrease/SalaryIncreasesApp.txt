@@ -1,0 +1,6 @@
+***SALARY INCREASES APP HISTORY***
+Employee 1's new Salary is: 20400.0
+Employee 2's new Salary is: 51500.0
+Employee 1's new Salary is: 20500.0
+Employee 2's new Salary is: 30600.0
+
