@@ -26,8 +26,13 @@ public class BinarySearchTreeApp<T>{
         myBST.insert(15);
         myBST.insert(10);
         myBST.insert(5);
-        myBST.insert(25);
+        myBST.insert(7);
+        myBST.insert(2);
+        myBST.insert(1);
         myBST.insert(20);
+        myBST.insert(17);
+        myBST.insert(22);
+
 
         System.out.println("Empty: "+myBST.isEmpty());
 
