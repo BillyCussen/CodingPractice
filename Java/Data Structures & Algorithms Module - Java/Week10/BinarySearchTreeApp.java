@@ -18,6 +18,30 @@ public class BinarySearchTreeApp<T>{
         }
 
         try{
+            System.out.println("Max: "+myBST.getMax());
+        } catch(NullPointerException e){
+            System.out.println(e.getMessage());
+        }
+
+        try{
+            System.out.println("Min: "+myBST.getMin());
+        } catch(NullPointerException e){
+            System.out.println(e.getMessage());
+        }
+
+        try{
+            System.out.println("Contains: "+myBST.contains(2000));
+        } catch(NullPointerException e){
+            System.out.println(e.getMessage());
+        }
+
+        try{
+            System.out.println("Depth: "+myBST.getDepth());
+        } catch(NullPointerException e){
+            System.out.println(e.getMessage());
+        }
+
+        try{
             myBST.inOrder();
         } catch(NullPointerException e){
             System.out.println(e.getMessage());
@@ -38,6 +62,30 @@ public class BinarySearchTreeApp<T>{
 
         try{
             System.out.println("Size: "+myBST.size());
+        } catch(NullPointerException e){
+            System.out.println(e.getMessage());
+        }
+
+        try{
+            System.out.println("Max: "+myBST.getMax());
+        } catch(NullPointerException e){
+            System.out.println(e.getMessage());
+        }
+
+        try{
+            System.out.println("Min: "+myBST.getMin());
+        } catch(NullPointerException e){
+            System.out.println(e.getMessage());
+        }
+
+        try{
+            System.out.println("Contains: "+myBST.contains(2000));
+        } catch(NullPointerException e){
+            System.out.println(e.getMessage());
+        }
+
+        try{
+            System.out.println("Depth: "+myBST.getDepth());
         } catch(NullPointerException e){
             System.out.println(e.getMessage());
         }

@@ -1,7 +1,7 @@
 /*
 BSTNode.java
 Billy Cussen
-24/11/2020
+24/11/2020 - Updated 25/11/2020
 */
 
 public class BSTNode<T>{
@@ -12,15 +12,12 @@ public class BSTNode<T>{
 
     public BSTNode(T element){
         this.element = element;
-        this.left = null;
-        this.right = null;
     }
 
     @Override
-    public String toString(){   
-        String leftNode = (this.left == null ? "NULL" : this.left.element.toString());
-        String rightNode = (this.right == null ? "NULL" : this.right.element.toString());
-        return "Current Node: "+this.element+", Left Node: "+leftNode+", Right Node: "+rightNode;
+    public String toString(){
+        String leftNode = this.left == null ? "NULL" : this.left.element.toString();
+        String rightNode = this.right == null ? "NULL" : this.right.element.toString();
+        return "Current: "+this.element+", Left: "+leftNode+", Right: "+rightNode;
     }
-
 }
