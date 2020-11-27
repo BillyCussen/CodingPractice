@@ -88,7 +88,7 @@ class BinarySearchTree:
         if(current==None):
             return None
         if ((element > current.element)-(element < current.element)) == 0:
-            return current.toString()
+            return str(current)
         elif ((element > current.element)-(element < current.element)) == -1:
             return self.getNodeHelper(current.left,element)
         else:
@@ -107,11 +107,11 @@ class BinarySearchTree:
 
         if ((element > current.element)-(element < current.element)) == -1:
             if((element > current.left.element)-(element < current.left.element)==0):
-                return current.toString()
+                return str(current)
             else:
                 return self.getParentHelper(current.left, element)
         else:
             if((element > current.right.element) - (element < current.right.element)==0):
-                return current.toString()
+                return str(current)
             else:
                 return self.getParentHelper(current.right, element)
