@@ -78,3 +78,40 @@ class BinarySearchTree:
             return current.element
         else:
             return self.getMaxHelper(current.right)
+
+    def getNode(self, element):
+        if self.isEmpty():
+            raise Exception("Can't get Node, BST is Empty!")
+        return self.getNodeHelper(self.root,element)
+
+    def getNodeHelper(self, current, element):
+        if(current==None):
+            return None
+        if ((element > current.element)-(element < current.element)) == 0:
+            return current.toString()
+        elif ((element > current.element)-(element < current.element)) == -1:
+            return self.getNodeHelper(current.left,element)
+        else:
+            return self.getNodeHelper(current.right,element)
+
+    def getParent(self, element):
+        if self.isEmpty():
+            raise Exception("Unable to get Parent, BST is Empty!")
+        elif ((element > self.root.element)-(element < self.root.element))==0:
+            raise Exception("Unable to get Parent, this element is the Root!")
+        return self.getParentHelper(self.root,element)
+
+    def getParentHelper(self, current, element):
+        if(current==None):
+            return None
+
+        if ((element > current.element)-(element < current.element)) == -1:
+            if((element > current.left.element)-(element < current.left.element)==0):
+                return current.toString()
+            else:
+                return self.getParentHelper(current.left, element)
+        else:
+            if((element > current.right.element) - (element < current.right.element)==0):
+                return current.toString()
+            else:
+                return self.getParentHelper(current.right, element)

@@ -26,6 +26,14 @@ try:
     print("Max: "+str(myBST.getMax()))
 except Exception as e:
     print(e)
+try:
+    print("Get Node: "+str(myBST.getNode(2)))
+except Exception as e:
+    print(e)
+try:
+    print("Get Parent: "+str(myBST.getParent(2)))
+except Exception as e:
+    print(e)
 
 myBST.insert(15)
 myBST.insert(10)
@@ -55,5 +63,17 @@ except Exception as e:
     print(e)
 try:
     print("Max: "+str(myBST.getMax()))
+except Exception as e:
+    print(e)
+try:
+    print("Get Node: "+str(myBST.getNode(2)))
+except Exception as e:
+    print(e)
+try:
+    print("Get Parent: "+str(myBST.getParent(2)))
+except Exception as e:
+    print(e)
+try:
+    print("Get Parent: "+str(myBST.getParent(15)))
 except Exception as e:
     print(e)
