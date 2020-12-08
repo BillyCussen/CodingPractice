@@ -126,18 +126,115 @@ public class BST<T extends Comparable<T>> implements BSTInterface<T>{
 
     @Override
     public T remove(T element){
+        BSTNode<T> toRemove = findNode(element);
+        BSTNode<T> parent = findParent(element);
+        if(isEmpty()){
+            throw new NullPointerException("Can't remove "+element+" from BST, BST is Empty!");
+        } else if (toRemove==null){
+            throw new NullPointerException(element+" does not exist on the BST!");
+        } else if (element.compareTo(this.root.element)==0){
+            throw new NullPointerException("Can't remove "+element+", its the element of the Root Node!");
+        }
+        
+        if(toRemove.left==null && toRemove.right == null){
+            if(toRemove.element.compareTo(parent.element)==-1){
+                parent.left = null;
+                return toRemove.element;
+            } else{
+                parent.right = null;
+                return toRemove.element;
+            }
+        } else if(toRemove.left!=null && toRemove.right == null){
+            if(toRemove.element.compareTo(parent.element)==-1){
+                parent.left = toRemove.left;
+            } else{
+                parent.left = toRemove.right;
+            }
+        } else if(toRemove.left == null && toRemove.right != null){
+            if(toRemove.element.compareTo(parent.element)==-1){
+                parent.left = toRemove.right;
+            } else{
+                parent.right = toRemove.right;
+            }
+        }
+
         return null;
+    }
+
+    private BSTNode<T> findNode(T element){
+        if(isEmpty()){
+            throw new NullPointerException("Can't find Node with element "+element+", BST is Empty!");
+        }
+        return findNodeHelper(this.root, element);
+    }
+
+    private BSTNode<T> findNodeHelper(BSTNode<T> current, T element){
+        if(current==null){
+            return null;
+        }
+
+        if(element.compareTo(current.element)==0){
+            return current;
+        } else if(element.compareTo(current.element)==-1){
+            return findNodeHelper(current.left, element);
+        } else{
+            return findNodeHelper(current.right, element);
+        }
+    }
+
+    private BSTNode<T> findParent(T element){
+        if(isEmpty()){
+            throw new NullPointerException("Can't find Parent Node of element "+element+", BST is Empty!");
+        } else if(element.compareTo(this.root.element)==0){
+            throw new NullPointerException("Can't find Parent Node of element "+element+", this is the Root Node!");
+        }
+        return findParentHelper(this.root, element);
+    }
+
+    private BSTNode<T> findParentHelper(BSTNode<T> current, T element){
+        if(current==null){
+            return null;
+        }
+
+        if(element.compareTo(current.element)==-1){
+            if(element.compareTo(current.left.element)==0){
+                return current;
+            } else{
+                return findParentHelper(current.left, element);
+            }
+        } else{
+            if(element.compareTo(current.right.element)==0){
+                return current;
+            } else{
+                return findParentHelper(current.right, element);
+            }
+        }
     }
 
     @Override
     public boolean contains(T element){
-        return false;
+        if(isEmpty()){
+            throw new NullPointerException("Can't check if BST contains "+element+", BST is empty!");
+        }
+        return containsHelper(this.root, element);
+    }
+
+    private boolean containsHelper(BSTNode<T> current, T element){
+        if(current == null){
+            return false;
+        }
+
+        if(element.compareTo(current.element)==0){
+            return true;
+        } else if (element.compareTo(current.element)==-1){
+            return containsHelper(current.left, element);
+        } else{
+            return containsHelper(current.right, element);
+        }
     }
 
     @Override
     public boolean isEmpty(){
         return this.root == null;
     }
-
-
 }
